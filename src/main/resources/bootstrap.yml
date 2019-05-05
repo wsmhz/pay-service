@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: '@project.artifactId@'
+  cloud:
+    config:
+      fail-fast: ${SPRING_CLOUD_CONFIG_FAIL-FAST:true}
+      profile: ${SPRING_CLOUD_CONFIG_PROFILE:local}
+      uri: ${SPRING_CLOUD_CONFIG_URI:http://localhost:8083}
+      retry:
+        max-attempts: ${SPRING_CLOUD_CONFIG_RETRY_MAX-ATTEMPTS:10}
+        max-interval: ${SPRING_CLOUD_CONFIG_RETRY_MAX-INTERVAL:10000}
+        initial-interval: ${SPRING_CLOUD_CONFIG_RETRY_INITIAL-INTERVAL:1000}
+  main:
+    allow-bean-definition-overriding: true
+eureka:
+  instance:
+    instanceId: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
