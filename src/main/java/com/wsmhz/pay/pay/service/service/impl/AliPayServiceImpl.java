@@ -4,7 +4,6 @@ import com.alipay.api.AlipayResponse;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.response.AlipayTradePrecreateResponse;
 import com.alipay.api.response.AlipayTradeRefundResponse;
-import com.alipay.demo.trade.config.Configs;
 import com.alipay.demo.trade.model.ExtendParams;
 import com.alipay.demo.trade.model.GoodsDetail;
 import com.alipay.demo.trade.model.builder.AlipayTradePrecreateRequestBuilder;

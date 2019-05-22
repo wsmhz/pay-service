@@ -1,6 +1,6 @@
 spring:
   application:
-    name: @project.artifactId@
+    name: 'pay-service'
   cloud:
     config:
       fail-fast: ${SPRING_CLOUD_CONFIG_FAIL-FAST:true}
