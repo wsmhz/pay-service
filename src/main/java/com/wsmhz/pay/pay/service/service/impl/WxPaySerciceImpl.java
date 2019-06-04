@@ -85,7 +85,7 @@ public class WxPaySerciceImpl implements WxPaySercice {
         payInfo.put("nonceStr", nonceStr);
         payInfo.put("package", "prepay_id=" + prepay_id);
         payInfo.put("signType", WxPayConstants.SignType.MD5);
-        String paySign = SignUtils.createSign(payInfo, payProperties.getWx().getMchId(), null);
+        String paySign = SignUtils.createSign(payInfo, payProperties.getWx().getKey(), null);
 
         return checkResponse(result, WxPayResponseVo.builder()
                                         .prepayId(prepay_id)

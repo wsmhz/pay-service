@@ -47,7 +47,7 @@ public class PayTestController {
     @ResponseBody
     public byte[] pay(HttpServletRequest request){
         String path = request.getSession().getServletContext().getRealPath("upload");
-        File file = ZxingUtils.getQRCodeImge("http://172.30.34.54:8101/paytest", 256, path);
+        File file = ZxingUtils.getQRCodeImge("http://tbj.n.yumc.pw/paytest", 256, path);
         return IOUtils.toByteArray(new FileInputStream(file));
     }
 
@@ -60,39 +60,40 @@ public class PayTestController {
             log.info("发起支付宝请求");
         } else if(ua.contains(WXPAY)){
             log.info("发起微信请求");
-            String openId = request.getParameter("openId");
-            if (StringUtils.isBlank(openId)) {
-                String GetOpenIdURL2 = "http://tbj.n.yumc.pw/goods/getOpenId";
-                String QR_PAY_URL_my = "http://172.30.34.54:8101/paytest";
-                String redirectUrl = QR_PAY_URL_my + "?amount=" + 2;
-                String url = GetOpenIdURL2 + "?redirectUrl=" + redirectUrl;
-                log.info("跳转URL={}", url);
-                return "redirect:" + url;
-            }
+//            String openId = request.getParameter("openId");
+//            if (StringUtils.isBlank(openId)) {
+//                String GetOpenIdURL2 = "http://tbj.n.yumc.pw/goods/getOpenId";
+//                String QR_PAY_URL_my = "http://tbj.n.yumc.pw/paytest";
+//                String redirectUrl = QR_PAY_URL_my + "?amount=" + 2;
+//                String url = GetOpenIdURL2 + "?redirectUrl=" + redirectUrl;
+//                log.info("跳转URL={}", url);
+//                return "redirect:" + url;
+//            }
             WxPayResponseVo wxPayResponseDto = wxPaySercice.unifiedOrder(WxPayUnifiedOrderForm.builder()
-                                        .businessSystemName("web-test")
-                                        .openId(openId)
-                                        .platform("wx")
-                                        .orderNo(String.valueOf(System.nanoTime()))
-                                        .payment("2")
-                                        .notifyUrl("https://tbj.n.yumc.pw/api/wx/pay/notify")
-                                        .tradeType("JSAPI")
-                                        .productId("1")
-                                        .deviceInfo("WEB")
-                                        .feeType("CNY")
-                                        .orderItemList(Lists.newArrayList(
-                                                WxOrderItemForm.builder()
-                                                        .productId("1")
-                                                        .productName("测试")
-                                                        .quantity(1)
-                                                        .price("2").build()
-                                        )).build());
+                                    .platform("wx")
+                                    .businessSystemName("web-test")
+                                    .openId("onejlwKjnW7KAOgotykVdEQID-tQ")
+                                    .platform("wx")
+                                    .orderNo(String.valueOf(System.nanoTime()))
+                                    .payment("2")
+                                    .notifyUrl("http://www.jxy-edu.com/result.jsp")
+                                    .tradeType("JSAPI")
+                                    .productId("1")
+                                    .deviceInfo("WEB")
+                                    .feeType("CNY")
+                                    .orderItemList(Lists.newArrayList(
+                                            WxOrderItemForm.builder()
+                                                    .productId("1")
+                                                    .productName("测试")
+                                                    .quantity(1)
+                                                    .price("2").build()
+                                    )).build());
             model.addAttribute("payResult", wxPayResponseDto);
             log.info("微信支付结果响应: {}", wxPayResponseDto);
         } else {
             throw new BussinessException("不支持的扫码设备类型");
         }
-        return "pay";
+        return "qrPay";
     }
 
 }
