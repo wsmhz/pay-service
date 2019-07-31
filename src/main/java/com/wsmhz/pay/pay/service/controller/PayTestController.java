@@ -1,6 +1,7 @@
 package com.wsmhz.pay.pay.service.controller;
 
 import com.google.common.collect.Lists;
+import com.wsmhz.common.business.annotation.UnAuth;
 import com.wsmhz.common.business.exception.BussinessException;
 import com.wsmhz.pay.pay.service.api.domain.form.wx.WxOrderItemForm;
 import com.wsmhz.pay.pay.service.api.domain.form.wx.WxPayUnifiedOrderForm;
@@ -43,6 +44,7 @@ public class PayTestController {
 
     // *********** 聚合支付测试 *************
     @SneakyThrows
+    @UnAuth
     @GetMapping(value = "/pay",produces = MediaType.IMAGE_PNG_VALUE)
     @ResponseBody
     public byte[] pay(HttpServletRequest request){

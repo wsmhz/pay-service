@@ -1,6 +1,7 @@
 package com.wsmhz.pay.pay.service.controller;
 
 import com.github.wxpay.sdk.WXPayUtil;
+import com.wsmhz.common.business.annotation.UnAuth;
 import com.wsmhz.pay.pay.service.api.api.PayServiceApi;
 import com.wsmhz.pay.pay.service.api.domain.form.ali.AliPayPrecreateForm;
 import com.wsmhz.pay.pay.service.api.domain.form.ali.AliRefundForm;
@@ -61,6 +62,7 @@ public class PayController implements PayServiceApi {
     /**
      * 支付宝支付成功回调    支付回调验签地址在支付中心
      */
+    @UnAuth
     @SneakyThrows
     @PostMapping("/ali/pay/notify")
     public String aliPayNotify(HttpServletRequest request){
@@ -74,6 +76,7 @@ public class PayController implements PayServiceApi {
     /**
      * 支付宝支付成功回调验签   支付回调验签地址在业务项目
      */
+    @UnAuth
     @Override
     @PostMapping("/ali/pay/checkSign")
     public AliPayCheckSignResponseVo aliPayCheckSign(@RequestBody Map<String,String> params){
@@ -103,6 +106,7 @@ public class PayController implements PayServiceApi {
     /**
      * 微信支付成功回调
      */
+    @UnAuth
     @PostMapping("/wx/pay/notify")
     public void wxPayNotify(HttpServletRequest request , HttpServletResponse response){
         boolean signatureValid = wxPaySercice.checkSign(request);
@@ -112,6 +116,7 @@ public class PayController implements PayServiceApi {
     /**
      * 微信退款成功回调
      */
+    @UnAuth
     @PostMapping("/wx/refund/notify")
     public void wxRefundNotify(HttpServletRequest request , HttpServletResponse response){
         boolean result = wxPaySercice.checkRefundSign(request);

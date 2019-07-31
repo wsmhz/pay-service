@@ -24,5 +24,4 @@ spring.freemarker.expose-request-attributes: true
 spring.freemarker.expose-session-attributes: true
 spring.freemarker.request-context-attribute: request
 spring.freemarker.suffix: .ftl
-spring.freemarker.templateEncoding: UTF-8
 spring.freemarker.templateLoaderPath: classpath:/templates/

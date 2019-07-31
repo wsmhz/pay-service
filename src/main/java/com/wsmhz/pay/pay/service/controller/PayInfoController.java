@@ -1,5 +1,6 @@
 package com.wsmhz.pay.pay.service.controller;
 
+import com.wsmhz.common.business.annotation.UnAuth;
 import com.wsmhz.common.business.utils.DozerBeanUtil;
 import com.wsmhz.pay.pay.service.api.api.PayInfoApi;
 import com.wsmhz.pay.pay.service.api.domain.form.PayInfoInSertForm;
@@ -26,6 +27,7 @@ public class PayInfoController implements PayInfoApi {
     @Autowired
     private PayInfoService payInfoService;
 
+    @UnAuth
     @Override
     @PostMapping("/payInfo")
     public int insertSelective(@RequestBody @Valid PayInfoInSertForm payInfoInSertForm){
